@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Trial Angular JS</title>
+</head>
+<body ng-app="mainApp">
+<script src="js/angular.min.js"></script>
+<script src="script/app.js"></script>
+<h1>To-do App</h1>
+
+<div ng-controller="MainCtrl">
+    <div>
+        <input type="text" placeholder="Enter todo" ng-model="newTodos.text">
+        <input type="hidden" ng-model="newTodos.complete">
+        <button ng-click="add()">Add</button>
+    </div>
+    <br>
+    <div ng-repeat="item in todos">
+        <input type="checkbox" ng-model="item.completed" value="false">
+        <span ng-bind="item.text"></span>
+        <button ng-click="delete(item)">x</button>
+    </div>
+    <br>
+</div>
+</body>
+</html>
