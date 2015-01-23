@@ -11,4 +11,7 @@ angular.module("mainApp",[])
             var index = $scope.todos.indexOf(item);
             $scope.todos.splice(index,1);
         }
+        $scope.clear = function(){
+            $scope.todos = [];
+        }
     })
