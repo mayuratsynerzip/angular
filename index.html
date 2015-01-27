@@ -5,6 +5,11 @@
     <title>Trial Angular JS</title>
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/main.css">
+    <style>
+        .active {
+            background:#dcdcdc;
+        }
+    </style>
 </head>
 <body ng-app="mainApp">
     <div ng-controller="MainCtrl">
@@ -16,16 +21,20 @@
             <form ng-submit="add()" name = "form" >
                 <input name = "text" type="text" placeholder="Enter Toto items here" ng-model="newTodos.text" required>
                 <input type="hidden" ng-model="newTodos.complete">&nbsp;
-                <button name="btnAdd"type="submit" class="btn btn-primary" ng-disabled="form.$invalid">Add</button>
+                <button name="btnAdd"type="submit" class="btn btn-primary" ng-click="criteria='All'" ng-disabled="form.$invalid">Add</button>
                 <br>
                 <span ng-show="form.text.$error.required">Todo is required.</span>
             </form>
             <br>
-            <div ng-repeat="item in todos">
+            <div ng-repeat="item in todos | TodoFilter:criteria">
                     <input type="checkbox" ng-model="item.completed">
                     <span ng-bind="item.text" ng-class="{'completed':item.completed}"></span>
                     <button ng-click="delete(item)">x</button>
             </div>
+            <hr>
+            <a href="#" ng-click="criteria='All'" ng-class="{'active': criteria === 'All'}">All</a>|
+            <a href="#" ng-click="criteria='Active'" ng-class="{'active': criteria === 'Active'}">Active</a>|
+            <a href="#" ng-click="criteria='Completed'" ng-class="{'active': criteria === 'Completed'}">Completed</a>
             <div ng-show="todos.length<=0">No todos</div>
             <button ng-click="clearCompleted()" class="btn btn-primary">Clear Completed</button>&nbsp;
             <button ng-click="clearAll()" class="btn btn-primary">Clear all</button>
@@ -37,6 +46,7 @@
     <script src="script/todo/todo.module.js"></script>
     <script src="script/todo/todo.controller.js"></script>
     <script src="script/todo/todo.services.js"></script>
+    <script src="script/todo/todo.filter.js"></script>
     <script src="script/app.js"></script>
 </body>
 </html>

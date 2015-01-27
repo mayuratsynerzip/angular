@@ -19,9 +19,6 @@ angular.module("todo")
         var index = $scope.todos.indexOf(item);
         $scope.todos.splice(index,1);
     }
-    $scope.clearAll = function(){
-        $scope.todos = [];
-    }
     $scope.clearCompleted = function () {
         TodoService.clearCompleted();
     }
